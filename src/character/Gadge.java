@@ -1,6 +1,5 @@
 package character;
 
-import bodyparts.Legs;
 import object.Location;
 
 public class Gadge extends Entity {

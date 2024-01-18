@@ -1,6 +1,5 @@
 package object;
 
-import bodyparts.Hold;
 import character.Entity;
 import enums.*;
 

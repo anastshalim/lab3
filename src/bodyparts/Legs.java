@@ -1,6 +1,5 @@
 package bodyparts;
 import character.Entity;
-import object.Location;
 
 public class Legs extends BodyPart {
     private int weight;
