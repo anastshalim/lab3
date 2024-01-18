@@ -8,6 +8,6 @@ public class Lips extends BodyPart{
         super(owner);
     }
     public void bite(){
-        owner.setHealth(65);
+        getOwner().setHealth(65);
     }
 }

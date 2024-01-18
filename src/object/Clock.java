@@ -27,12 +27,16 @@ public class Clock {
     }
 
     public void time() {
-        System.out.println("На часах было " + getHours() + " часов " + getMinutes() + " минут");
+        String text = String.format("На часах было %d часов %d минут",
+                getHours(), getMinutes());
+        System.out.println(text);
         setHours(0);
         setMinutes(20);
         minutes += getMinutes();
         hours += getHours();
-        System.out.println("На часах стало " + getHours() + " часов " + getMinutes() + " минут");
+        String text1 = String.format("На часах стало %d часов %d минут",
+                getHours(), getMinutes());
+        System.out.println(text1);
     }
 }
 

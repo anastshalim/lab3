@@ -1,10 +1,8 @@
 package object;
 
 import character.Luis;
-import character.Worm;
-import enums.Emotion;
 import enums.Material;
-import enums.WormCondition;
+
 
 public class Shovel  extends Item{
 

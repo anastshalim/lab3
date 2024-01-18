@@ -8,50 +8,67 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Luis extends Entity implements Hold{
-    protected Location location;
+public class Luis extends Entity implements Hold {
+    private Location location;
     private String name;
-    protected ArrayList<Emotion> emotion = new ArrayList<>();
-    public Fingers fingers= new Fingers(this);
-    protected Lips lips = new Lips(this);
+    private final ArrayList<Emotion> emotion = new ArrayList<>();
+    private final Fingers fingers = new Fingers(this);
+    private final Armpit armpit = new Armpit(this);
 
-    protected Item thought;
-    protected Item object;
+    private final Lips lips = new Lips(this);
+    private final Legs legs = new Legs(this);
+    private Item thought;
+    private Item object;
 
-    public Luis(int health, Location loc, String name) {
-        super(health, loc, name);
+    public Luis(int health, Location location, String name) {
+        super(health, location, name);
     }
 
     public void setTypes(Emotion... emotion) {
         this.emotion.addAll(Arrays.asList(emotion));
     }
+
     public boolean hasType(Emotion emotion) {
         return this.emotion.contains(emotion);
     }
-    public void remember(Item item){
-        this.thought = item;
-        if (item.getClass()==Coffin.class){
-            Coffin clone = (Coffin)item;
-            clone.addCondition(CoffinCondition.CLEAN, CoffinCondition.WHITE, CoffinCondition.WHITE);
-            this.thought=clone;
-        }
+    public String getName(){
+        return name;
     }
-    public void feelPain(){
+    public void setName(String name){
+        this.name=name;
+    }
+    public void remember(Item item) {
+        setThought(item);
+        Item thought1 = getThought();
+        if (item instanceof Coffin) {
+            Coffin clone;
+            clone = (Coffin) item;
+            clone.addCondition(CoffinCondition.CLEAN, CoffinCondition.WHITE, CoffinCondition.WHITE);
+            setThought(clone);
+            thought1.setOwner(this);
+        }
+        legs.weightlessness();
+    }
+
+    public void feelPain() {
         lips.bite();
         this.setTypes(Emotion.FEROCIOUS);
 
     }
-    public void see(Coffin coffin){
-        if (!coffin.getStove().getRaise()){
+
+    public void see(Coffin coffin) {
+        if (!coffin.getStove().getRaise()) {
             coffin.getStove().openCoffin();
         }
 
     }
-    public void dig(Shovel shovel){
-        if (this.hasType(Emotion.FEROCIOUS)){
+
+    public void dig(Shovel shovel) {
+        armpit.holdObject(shovel);
+        if (this.hasType(Emotion.FEROCIOUS)) {
             shovel.setDamage(50);
             this.setHealth(50);
-            this.setTypes(Emotion.LONELY,Emotion.ALIEN);
+            this.setTypes(Emotion.LONELY, Emotion.ALIEN);
         } else {
             shovel.setDamage(50);
             this.setHealth(20);
@@ -59,13 +76,14 @@ public class Luis extends Entity implements Hold{
         }
 
     }
-    public void feel(Worm worm){
-        worm.setCondition(WormCondition.COlD,WormCondition.STICKY);
+
+    public void feel(Worm worm) {
         this.setHealth(10);
         this.setTypes(Emotion.DISGUST);
         worm.getout(this.getLocation());
-        fingers.feelWorm(worm);
+        fingers.touchWorm(worm);
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -73,23 +91,41 @@ public class Luis extends Entity implements Hold{
         if (this.hashCode() != object.hashCode()) return false;
         Entity person = (Entity) obj;
         return person.getName().equals(this.name) && person.getHealth() == this.getHealth();
-
-
     }
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(name, getHealth(), getLocation());
     }
+
     @Override
     public void holdObject(Item object) {
-        this.object=object;
+        this.object = object;
         this.object.setOwner(this);
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 
+    @Override
+    public Location getLocation() {
+        return location;
+    }
+
+    @Override
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Item getThought() {
+        return thought;
+    }
+
+    public void setThought(Item thought) {
+        this.thought = thought;
+    }
 }
 
 

@@ -3,19 +3,16 @@ package object;
 import character.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Location {
-
-
     private final String name;
+    private final ArrayList<Entity> entities = new ArrayList<>();
+    private final ArrayList<Item> items = new ArrayList<>();
 
     public Location(String name) {
         this.name = name;
     }
-
-    private ArrayList<Entity> entities = new ArrayList<>();
-    private ArrayList<Item> items = new ArrayList<>();
-
 
     public void setEntity(Entity... people) {
         this.entities.addAll(Arrays.asList(people));
@@ -27,6 +24,10 @@ public class Location {
     public Entity[] getEntity() {
         Entity[] entities = new Entity[this.entities.size()];
         return this.entities.toArray(entities);
+    }
+
+    public List<Item> getItems() {
+        return this.items;
     }
 
     public void removeEntity(Entity... entities) {
@@ -49,13 +50,10 @@ public class Location {
             item.setLocation(this);
         }
     }
-    public String getLocation () {
+    public String getLocation() {
         return name;
     }
 
-    public void setLocation(ArrayList<Entity> entities) {
-        this.entities = entities;
-    }
 
     @Override
     public String toString () {

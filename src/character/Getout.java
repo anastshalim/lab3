@@ -1,4 +1,4 @@
-package enums;
+package character;
 
 import object.Location;
 

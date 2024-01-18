@@ -3,8 +3,8 @@ package object;
 import bodyparts.Hold;
 import enums.Material;
 
-public class Rope extends Item implements Hold{
-    private boolean tie=false;
+public class Rope extends Item implements Hold {
+    private boolean tie;
 
     public Rope(int damage, Location location, Material material) {
         super(damage, location, material);
@@ -21,15 +21,14 @@ public class Rope extends Item implements Hold{
 
     public void isTied() {
         setTie(true);
-
     }
 
     @Override
     public void holdObject(Item item) {
-        if (getTie()){
+        if (getTie()) {
             isTied();
-          }
         }
-
     }
+
+}
 

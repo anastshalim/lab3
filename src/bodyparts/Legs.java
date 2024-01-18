@@ -8,10 +8,9 @@ public class Legs extends BodyPart {
         super(owner);
     }
 
-    public void explore(Location location){
-        location.removeEntity(owner);
+    public void weightlessness(){
         if (getWeight()> 0){
-            owner.setHealth(0);
+            getOwner().setHealth(0);
         }
         else{
             setWeight(10);

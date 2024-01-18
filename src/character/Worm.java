@@ -1,6 +1,5 @@
 package character;
 
-import enums.Getout;
 import enums.WormCondition;
 import object.Location;
 
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Worm extends Entity implements Getout {
-    private ArrayList<WormCondition> characteristics = new ArrayList<>();
+    protected ArrayList<WormCondition> characteristics = new ArrayList<>();
     public Worm(int damage, Location location, String name) {
         super(damage, location, name);
     }

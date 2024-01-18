@@ -1,10 +1,12 @@
 package character;
 
+import bodyparts.Hold;
+import object.Item;
 import object.Location;
 
-public class Entity {
+public class Entity implements Hold{
     private int health;
-    protected Location location;
+    private Location location;
     private String name;
 
     public Entity(int health, Location location, String name) {
@@ -37,6 +39,11 @@ public class Entity {
         this.location = location;
         location.addEntity(this);
     }
+    @Override
+    public void holdObject(Item object) {
+        object.setOwner(this);
+    }
+
 
     @Override
     public String toString() {

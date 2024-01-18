@@ -3,10 +3,14 @@ package bodyparts;
 import character.Entity;
 
 abstract public class BodyPart {
-    protected Entity owner;
+    private final Entity owner;
+
     public BodyPart(Entity owner) {
         this.owner = owner;
     }
 
 
+    public Entity getOwner() {
+        return owner;
+    }
 }

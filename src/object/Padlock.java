@@ -9,7 +9,7 @@ public class Padlock extends Item{
     public Padlock(int damage, Location location, Material material) {
         super(damage, location, material);
     }
-    public void CHECK() {
+    public void check() {
         if (isOpen()) {
             setDamage(100);
             System.out.println("Замок открыт");
